@@ -75,6 +75,10 @@ import:
 - package: golang.org/x/oauth2
   version: 08c8d727d2392d18286f9f88ad775ad98f09ab33
 
+  # Used in Google connector.
+- package: google.golang.org/api/admin/directory/v1
+  version: f7618f4b41caffc0e9f141e6f67957587341dde2
+
 # The oauth2 package only imports the appengine code when it's given a
 # specific build tags, but glide detects it anyway.
 #
@@ -133,9 +137,9 @@ import:
   - proto
   - protoc-gen-go
   - protoc-gen-go/grpc
-  - protoc-gen-go/descriptor        
-  - protoc-gen-go/plugin            
-  - protoc-gen-go/generator   
+  - protoc-gen-go/descriptor
+  - protoc-gen-go/plugin
+  - protoc-gen-go/generator
 - package: google.golang.org/genproto
   version: 411e09b969b1170a9f0c467558eb4c4c110d9c77
 
