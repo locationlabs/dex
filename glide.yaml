@@ -78,6 +78,14 @@ import:
   # Used in Google connector.
 - package: google.golang.org/api/admin/directory/v1
   version: f7618f4b41caffc0e9f141e6f67957587341dde2
+- package: google.golang.org/api/gensupport
+  version: f7618f4b41caffc0e9f141e6f67957587341dde2
+- package: google.golang.org/api/googleapi
+  version: f7618f4b41caffc0e9f141e6f67957587341dde2
+- package: google.golang.org/api/googleapi/internal/uritemplates
+  version: f7618f4b41caffc0e9f141e6f67957587341dde2
+- package: google.golang.org/cloud/compute/metadata
+  version: c1d6c20e26a9664da077a2bcdac922e4bc2d5766
 
 # The oauth2 package only imports the appengine code when it's given a
 # specific build tags, but glide detects it anyway.
