@@ -44,13 +44,10 @@ This account needs Domain-Wide Delegation and permission to access the `https://
 
 To get group fetching set up:
 
-1. Follow the [instructions](dwd-instructions) to set up a service account with Domain-Wide Delegation
+1. Follow the [instructions](https://developers.google.com/admin-sdk/directory/v1/guides/delegation) to set up a service account with Domain-Wide Delegation
   - During service account creation, a JSON key file will be created that contains authentication information for the service account. This needs storing in a location accessible by Dex and you will set the `serviceAccountFilePath` to point at it.
   - When delegating the API scopes to the service account, delegate the `https://www.googleapis.com/auth/admin.directory.group.readonly` scope and only this scope. If you delegate more scopes to the service account, it will not be able to access the API.
-2. Enable the [Admin SDK](admin-sdk)
+2. Enable the [Admin SDK](https://console.developers.google.com/apis/library/admin.googleapis.com/)
 3. Add the `serviceAccountFilePath` and `adminEmail` configuration options to your Dex config.
   - `serviceAccountFilePath` should point to the location of the service account JSON key file
-  - `adminEmail` should be the email of a G Suite super user. The service account you created earlier will impersonate this user when making calls to the admin API. A valid user should be able to retrieve a list of groups when [testing the API](testing-api).
-[dwd-instructions]: https://www.googleapis.com/auth/admin.directory.group
-[admin-sdk]: https://console.developers.google.com/apis/library/admin.googleapis.com/
-[testing-api]: https://developers.google.com/admin-sdk/directory/v1/reference/groups/list#try-it
+  - `adminEmail` should be the email of a G Suite super user. The service account you created earlier will impersonate this user when making calls to the admin API. A valid user should be able to retrieve a list of groups when [testing the API](https://developers.google.com/admin-sdk/directory/v1/reference/groups/list#try-it).
