@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"regexp"
 	"time"
 
 	"github.com/coreos/go-oidc"
@@ -43,7 +44,9 @@ type Config struct {
 	// Required if ServiceAccountFilePath
 	// The email of a GSuite super user which the service account will impersonate
 	// when listing groups
-	AdminEmail string
+	AdminEmail string `json:"adminEmail"`
+
+	GroupFilters []string `json:"groups"`
 }
 
 // Open returns a connector which can be used to login users through Google.
@@ -81,6 +84,7 @@ func (c *Config) Open(id string, logger logrus.FieldLogger) (conn connector.Conn
 		hostedDomains:          c.HostedDomains,
 		serviceAccountFilePath: c.ServiceAccountFilePath,
 		adminEmail:             c.AdminEmail,
+		groupFilters:           c.GroupFilters,
 	}, nil
 }
 
@@ -99,6 +103,7 @@ type googleConnector struct {
 	hostedDomains          []string
 	serviceAccountFilePath string
 	adminEmail             string
+	groupFilters           []string
 }
 
 func (c *googleConnector) Close() error {
@@ -232,7 +237,18 @@ func (c *googleConnector) getGroups(email string) ([]string, error) {
 
 	var userGroups []string
 	for _, group := range groupsList.Groups {
-		userGroups = append(userGroups, group.Email)
+		for _, pattern := range c.groupFilters {
+			matched, err := regexp.MatchString(pattern, group.Name)
+			if err != nil {
+				return nil, fmt.Errorf("error matching group with pattern: %v", err)
+			}
+			if matched {
+				userGroups = append(userGroups, group.Name)
+			}
+		}
+	}
+	if len(userGroups) == 0 {
+		return nil, fmt.Errorf("user does not belong to any configured group: %+v", groupsList.Groups)
 	}
 
 	return userGroups, nil
