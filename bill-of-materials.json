@@ -279,6 +279,33 @@
 		]
 	},
 	{
+		"project": "google.golang.org/api",
+		"licenses": [
+			{
+				"type": "BSD 3-clause \"New\" or \"Revised\" License",
+				"confidence": 0.9663865546218487
+			}
+		]
+	},
+	{
+		"project": "google.golang.org/api/googleapi/internal/uritemplates",
+		"licenses": [
+			{
+				"type": "MIT License",
+				"confidence": 0.9891304347826086
+			}
+		]
+	},
+	{
+		"project": "google.golang.org/cloud/compute/metadata",
+		"licenses": [
+			{
+				"type": "Apache License 2.0",
+				"confidence": 1
+			}
+		]
+	},
+	{
 		"project": "google.golang.org/genproto/googleapis/rpc/status",
 		"licenses": [
 			{
